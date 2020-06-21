@@ -1,5 +1,5 @@
 {
-  "name": "load-hashed-css-files-lazy",
+  "name": "lazy-load-hashed-css-files",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
