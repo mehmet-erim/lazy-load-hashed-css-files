@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "load-hashed-css-files-lazy"
+    }
+  },
+  "defaultProject": "load-hashed-css-files-lazy",
+  "cli": {
+    "analytics": false
+  }
 }

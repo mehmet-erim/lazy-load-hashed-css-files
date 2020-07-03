@@ -10,41 +10,23 @@ export class AppComponent implements OnInit {
   insertedElement: HTMLElement;
 
   ngOnInit() {
-    this.switchTheme();
+    this.loadTheme();
   }
 
-  switchTheme() {
-    let style;
-
-    switch (this.selectedTheme) {
-      case 'materia':
-        style = import(
-          /* webpackChunkName: "materia" */ '../assets/styles/materia.js'
-        ).then((s) => s.default);
-        break;
-      case 'journal':
-        style = import(
-          /* webpackChunkName: "journal" */ '../assets/styles/journal.js'
-        ).then((s) => s.default);
-        break;
-      case 'lux':
-        style = import(
-          /* webpackChunkName: "lux" */ '../assets/styles/lux.js'
-        ).then((s) => s.default);
-        break;
-    }
-
-    style.then((content) => this.insertToDom(content));
+  loadTheme() {
+    import(
+      /* webpackChunkName: "[request]" */ `../assets/styles/${this.selectedTheme}.js`
+    )
+      .then((s) => s.default)
+      .then(this.insertToDom);
   }
 
-  insertToDom(content: string) {
-    if (this.insertedElement) {
-      this.insertedElement.remove();
-    }
-
+  insertToDom = (content: string) => {
     const element = document.createElement('style');
     element.textContent = content;
     document.head.appendChild(element);
+
+    if (this.insertedElement) this.insertedElement.remove();
     this.insertedElement = element;
-  }
+  };
 }
